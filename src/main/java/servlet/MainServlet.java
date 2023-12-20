@@ -1,6 +1,8 @@
 package servlet;
 
 import controller.PostController;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
+import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import repository.PostRepository;
 import service.PostService;
 
@@ -13,14 +15,13 @@ import java.util.concurrent.Executors;
 
 public class MainServlet extends HttpServlet {
 
-    private final ExecutorService executorService = Executors.newCachedThreadPool();
     private PostController controller;
 
     @Override
     public void init() {
-        final var repository = new PostRepository();
-        final var service = new PostService(repository);
-        controller = new PostController(service);
+        final var factory = new DefaultListableBeanFactory();
+        final var reader = new XmlBeanDefinitionReader(factory);
+        reader.loadBeanDefinitions("beans.xml");
     }
 
     @Override
