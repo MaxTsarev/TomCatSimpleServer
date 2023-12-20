@@ -2,14 +2,14 @@ package service;
 
 import exception.NotFoundException;
 import model.Post;
-import repository.PostRepository;
+import repository.PostRepositoryStubImpl;
 
 import java.util.List;
 
 public class PostService {
-    private final PostRepository repository;
+    private final PostRepositoryStubImpl repository;
 
-    public PostService(PostRepository repository) {
+    public PostService(PostRepositoryStubImpl repository) {
         this.repository = repository;
     }
 

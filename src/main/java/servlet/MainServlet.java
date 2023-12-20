@@ -1,17 +1,15 @@
 package servlet;
 
+import config.JavaConfig;
 import controller.PostController;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
-import repository.PostRepository;
-import service.PostService;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class MainServlet extends HttpServlet {
 
@@ -19,9 +17,7 @@ public class MainServlet extends HttpServlet {
 
     @Override
     public void init() {
-        final var factory = new DefaultListableBeanFactory();
-        final var reader = new XmlBeanDefinitionReader(factory);
-        reader.loadBeanDefinitions("beans.xml");
+        final var context = new AnnotationConfigApplicationContext(JavaConfig.class);
     }
 
     @Override
